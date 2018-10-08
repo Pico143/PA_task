@@ -14,5 +14,6 @@ class LoginControllerTest {
     void resolveLogin() {
         LoginController controller = LoginController.getInstance();
         Assertions.assertEquals(UserRole.MANAGER, controller.resolveLogin("Manager", "1234").getUserRole());
+        Assertions.assertEquals(UserRole.USER, controller.resolveLogin("User", "1234").getUserRole());
     }
 }

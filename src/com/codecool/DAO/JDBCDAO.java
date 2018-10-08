@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public class JDBCDAO implements DAO {
 
+    private ArrayList<MediaItem> mediaItems;
+
     private static JDBCDAO instance = null;
 
     public static JDBCDAO getInstance() {
@@ -16,13 +18,22 @@ public class JDBCDAO implements DAO {
         return instance;
     }
 
-    @Override
-    public ArrayList<MediaItem> getAllMediaItems() {
-        return null;
+    private JDBCDAO() {
+        this.mediaItems = new ArrayList<>();
     }
 
     @Override
-    public MediaItem getSpecificMediaItemByID(String ID) {
+    public ArrayList<MediaItem> getAllMediaItems() {
+        return this.mediaItems;
+    }
+
+    @Override
+    public MediaItem getSpecificMediaItemByID(int ID) {
+        for (MediaItem item : this.mediaItems) {
+            if (item.getID() == ID) {
+                return item;
+            }
+        }
         return null;
     }
 
@@ -38,12 +49,12 @@ public class JDBCDAO implements DAO {
 
     @Override
     public void updateItemData(MediaItem item) {
-
+        // for now it does nothing, since we don't have DAO to send changes to, and object in list is modified directly
     }
 
     @Override
     public void addMediaItem(MediaItem item) {
-
+        this.mediaItems.add(item);
     }
 
     @Override
